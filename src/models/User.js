@@ -1,0 +1,33 @@
+// src/models/User.js
+const { DataTypes } = require('sequelize')
+
+module.exports = (sequelize) => sequelize.define('User', {
+  id:                   { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+  email:                { type: DataTypes.STRING, allowNull: false, unique: true },
+  password_hash:        { type: DataTypes.STRING },
+  google_id:            { type: DataTypes.STRING(100) },
+  titre:                { type: DataTypes.STRING(20) },
+  prenom:               { type: DataTypes.STRING },
+  nom:                  { type: DataTypes.STRING },
+  telephone:            { type: DataTypes.TEXT },
+  pays:                 { type: DataTypes.STRING },
+  adresse_facturation:  { type: DataTypes.TEXT },
+  role:                 { type: DataTypes.STRING, defaultValue: 'user' },
+  plan:                 { type: DataTypes.STRING, defaultValue: 'freemium' },
+  is_verified:          { type: DataTypes.BOOLEAN, defaultValue: false },
+  verify_token:         { type: DataTypes.STRING },
+  verify_token_expires: { type: DataTypes.DATE },
+  reset_token:          { type: DataTypes.STRING },
+  reset_token_expires:  { type: DataTypes.DATE },
+  refresh_token:        { type: DataTypes.TEXT },
+  freemium_starts_at:   { type: DataTypes.DATE },
+  freemium_expires_at:  { type: DataTypes.DATE },
+  last_login_at:        { type: DataTypes.DATE },
+  login_history:        { type: DataTypes.JSONB, defaultValue: [] },
+  preferences:          { type: DataTypes.JSONB, defaultValue: {} },
+}, {
+  tableName:  'users',
+  timestamps: true,
+  createdAt:  'created_at',
+  updatedAt:  'updated_at',
+})

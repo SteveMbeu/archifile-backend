@@ -1,0 +1,35 @@
+// src/models/Order.js
+const { DataTypes } = require('sequelize')
+
+module.exports = (sequelize) => sequelize.define('Order', {
+  id:               { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+  numero:           { type: DataTypes.STRING, allowNull: false, unique: true },
+  user_id:          { type: DataTypes.UUID, allowNull: false },
+  subscription_id:  { type: DataTypes.UUID },
+  plan:             { type: DataTypes.STRING, allowNull: false },
+  frequence:        { type: DataTypes.STRING, allowNull: false },
+  montant_ht:       { type: DataTypes.DECIMAL(12,2), allowNull: false },
+  taux_taxe:        { type: DataTypes.DECIMAL(5,2), defaultValue: 18 },
+  montant_taxe:     { type: DataTypes.DECIMAL(12,2), allowNull: false },
+  remise_pct:       { type: DataTypes.DECIMAL(5,2), defaultValue: 0 },
+  montant_total:    { type: DataTypes.DECIMAL(12,2), allowNull: false },
+  devise:           { type: DataTypes.STRING(10), defaultValue: 'XAF' },
+  statut:           { type: DataTypes.STRING, defaultValue: 'pending' },
+  methode_paiement: { type: DataTypes.STRING },
+  transaction_ref:  { type: DataTypes.TEXT },
+  carte_last4:      { type: DataTypes.STRING(4) },
+  carte_expiry:     { type: DataTypes.STRING(7) },
+  carte_titulaire:  { type: DataTypes.STRING },
+  paypal_email:     { type: DataTypes.TEXT },
+  mobile_numero:    { type: DataTypes.TEXT },
+  ip_address:       { type: DataTypes.STRING },
+  abandon_step:     { type: DataTypes.STRING },
+  relance_count:    { type: DataTypes.INTEGER, defaultValue: 0 },
+  last_relance_at:  { type: DataTypes.DATE },
+  paid_at:          { type: DataTypes.DATE },
+}, {
+  tableName:  'orders',
+  timestamps: true,
+  createdAt:  'created_at',
+  updatedAt:  'updated_at',
+})
