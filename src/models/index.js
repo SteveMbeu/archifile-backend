@@ -1,4 +1,3 @@
-// src/models/index.js
 const { Sequelize } = require('sequelize')
 
 const sequelize = new Sequelize(
@@ -26,7 +25,7 @@ const Order        = require('./Order')(sequelize)
 const Notification = require('./Notification')(sequelize)
 const DemoRequest  = require('./DemoRequest')(sequelize)
 
-// ── ASSOCIATIONS ─────────────────────────────────────────
+//  ASSOCIATIONS 
 User.hasMany(Document,     { foreignKey: 'user_id', as: 'documents'     })
 User.hasMany(Subscription, { foreignKey: 'user_id', as: 'subscriptions' })
 User.hasMany(Order,        { foreignKey: 'user_id', as: 'orders'        })

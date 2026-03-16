@@ -1,4 +1,3 @@
-// src/config/passport.js
 const passport       = require('passport')
 const pool           = require('./database')
 const { generateTokens } = require('../middlewares/auth')
